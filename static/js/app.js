@@ -54,8 +54,13 @@ function buildCharts(sample) {
     let bubble_traces = [bubble_trace];
 
     // Render the Bubble Chart
+    let bubble_layout = {
+      title: 'Bacteria Cultures per Sample'
+    };
 
+    Plotly.newPlot('bubble', bubble_traces, bubble-layout);
 
+    
     // For the Bar Chart, map the otu_ids to a list of strings for your yticks
 
 
