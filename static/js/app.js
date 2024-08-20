@@ -83,6 +83,14 @@ function buildCharts(sample) {
     // Render the Bar Chart
     let traces = [trace1];
 
+     // Apply a title to the layout
+     let layout = {
+      title: "Top 10 Bacteria Cultures Found"
+    };
+
+    // Render the plot to the div tag with id "plot"
+    Plotly.newPlot("bar", traces, layout);
+
   });
 }
 
