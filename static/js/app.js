@@ -60,15 +60,28 @@ function buildCharts(sample) {
 
     Plotly.newPlot('bubble', bubble_traces, bubble-layout);
 
-    
-    // For the Bar Chart, map the otu_ids to a list of strings for your yticks
 
+    // For the Bar Chart, map the otu_ids to a list of strings for your yticks
+    let bar_y = otu_ids.map(x => `OTU: ${x}`);
+    console.log(bar_y);
 
     // Build a Bar Chart
     // Don't forget to slice and reverse the input data appropriately
+    let trace1 = {
+      x: sample_values.slice(0, 10).reverse(),
+      y: bar_y.slice(0, 10).reverse(),
+      type: 'bar',
+      marker: {
+        colorscale: "plotly3",
+        color: sample_values.slice(0, 10).reverse()
+      },
+      text: otu_labels.slice(0, 10).reverse(),
+      orientation: 'h'
+    };
 
 
     // Render the Bar Chart
+    let traces = [trace1];
 
   });
 }
