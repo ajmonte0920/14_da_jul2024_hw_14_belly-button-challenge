@@ -27,16 +27,31 @@ function buildCharts(sample) {
   d3.json("https://static.bc-edx.com/data/dl-1-2/m14/lms/starter/samples.json").then((data) => {
 
     // Get the samples field
-
+    let sample_data = data.samples;
 
     // Filter the samples for the object with the desired sample number
-
+    let info = sample_data.filter(x => x.id === sample)[0];
+    console.log(info);
 
     // Get the otu_ids, otu_labels, and sample_values
-
+    let otu_ids = info.otu_ids;
+    let otu_labels = info.otu_labels;
+    let sample_values = info.sample_values;
 
     // Build a Bubble Chart
+    let bubble_trace = {
+      x: otu_ids,
+      y: sample_values,
+      mode: 'markers',
+      marker: {
+        color: otu_ids,
+        size: sample_values,
+        colorscale: "Electric"
+      },
+      text: otu_labels
+      };
 
+    let bubble_traces = [bubble_trace];
 
     // Render the Bubble Chart
 
