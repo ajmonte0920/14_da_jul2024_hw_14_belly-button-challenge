@@ -46,7 +46,7 @@ function buildCharts(sample) {
       marker: {
         color: otu_ids,
         size: sample_values,
-        colorscale: "Electric"
+        colorscale: "Picnic"
       },
       text: otu_labels
       };
@@ -58,7 +58,7 @@ function buildCharts(sample) {
       title: 'Bacteria Cultures per Sample'
     };
 
-    Plotly.newPlot('bubble', bubble_traces, bubble-layout);
+    Plotly.newPlot('bubble', bubble_traces, bubble_layout);
 
 
     // For the Bar Chart, map the otu_ids to a list of strings for your yticks
@@ -72,7 +72,7 @@ function buildCharts(sample) {
       y: bar_y.slice(0, 10).reverse(),
       type: 'bar',
       marker: {
-        colorscale: "plotly3",
+        colorscale: "Picnic",
         color: sample_values.slice(0, 10).reverse()
       },
       text: otu_labels.slice(0, 10).reverse(),
@@ -109,12 +109,18 @@ function init() {
     // Use the list of sample names to populate the select options
     // Hint: Inside a loop, you will need to use d3 to append a new
     // option for each sample name.
-
+    for (let i = 0; i < names.length; i++){
+      let name = names[i];
+      dropdown.append("option").text(name);
+    }
 
     // Get the first sample from the list
-
+    let default_name = names[0];
+    console.log(default_name);
 
     // Build charts and metadata panel with the first sample
+    buildCharts(default_name);
+    buildMetadata(default_name);
 
   });
 }
@@ -124,7 +130,6 @@ function optionChanged(newSample) {
   // Build charts and metadata panel each time a new sample is selected
   buildCharts(newSample);
   buildMetadata(newSample);
-
 }
 
 // Initialize the dashboard
